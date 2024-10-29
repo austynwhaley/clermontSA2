@@ -1,26 +1,51 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using clermontSA2.Models;
+using System.Collections.Generic;
 
-namespace clermontSA2.Controllers;
-
-public class MainController : Controller
+namespace clermontSA2.Controllers
 {
-    private readonly ILogger<MainController> _logger;
-
-    public MainController(ILogger<MainController> logger)
+    public class MainController : Controller
     {
-        _logger = logger;
-    }
+        private readonly ILogger<MainController> _logger;
+        private readonly ClermontDb _context;
 
-    public IActionResult Main()
-    {
-        return View();
-    }
+        public MainController(ILogger<MainController> logger, ClermontDb context)
+        {
+            _logger = logger;
+            _context = context;
+        }
 
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
-    {
-        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        public async Task<IActionResult> Index(int page = 1, int pageSize = 10)
+        {
+
+            var users = await _context.Users.ToListAsync();
+            var totalUsers = users.Count();
+
+            var totalPages = (int)Math.Ceiling(totalUsers / (double)pageSize);
+
+            var paginatedUsers = users.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+
+            var model = new UserListViewModel
+            {
+                Users = paginatedUsers,
+                CurrentPage = page,
+                TotalPages = totalPages
+            };
+
+            return View("Main", model);
+        }
+
+        public IActionResult Main()
+        {
+            return View();
+        }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
     }
 }

@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using clermontSA2.Models;
 
 public class ClermontDb : DbContext
 {

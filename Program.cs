@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using System.Net.Http;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,34 +10,51 @@ builder.Services.AddDbContext<ClermontDb>(options =>
 
 var app = builder.Build();
 
-// create db
+// Check database connection and user count
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var context = services.GetRequiredService<ClermontDb>();
+
+    try
+    {
+        // Check if database is accessible and count users
+        var userCount = await context.Users.CountAsync();
+        Console.WriteLine($"Database connected. Number of users: {userCount}");
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Database connection failed: {ex.Message}");
+    }
+}
+
+// Create the database and seed data
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
     var context = services.GetRequiredService<ClermontDb>();
     var randomUserService = services.GetRequiredService<RandomUser>();
 
-    // seed db
+    // Seed database
     await context.SeedDataAsync(randomUserService);
 }
 
-// middleware
+// Middleware
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Home/Error");
+    app.UseExceptionHandler("/Shared/Error");
     app.UseHsts();
 }
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
 app.UseRouting();
-
 app.UseAuthorization();
 
 // Map controller routes
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Main}/{action=Main}/{id?}");
+
 
 app.Run();

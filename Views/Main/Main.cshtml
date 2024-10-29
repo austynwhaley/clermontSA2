@@ -4,29 +4,7 @@
 
 @if (Model.Users.Any())
 {
-    <table class="user-table">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Phone</th>
-                <th>Details</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var user in Model.Users)
-            {
-                <tr>
-                    <td>@user.Name</td>
-                    <td>@user.Email</td>
-                    <td>@user.Phone</td>
-                    <td><a href="@Url.Action("Details", "User", new { id = user.Id })">View Details</a></td>
-                </tr>
-            }
-        </tbody>
-    </table>
-
-    // pagination controls
+    <!-- Pagination Controls -->
     <div class="pagination">
         @if (Model.CurrentPage > 1)
         {
@@ -38,6 +16,34 @@
             <a href="@Url.Action("Index", new { page = Model.CurrentPage + 1 })" class="next">Next</a>
         }
     </div>
+    <table class="user-table">
+        <thead>
+            <tr>
+                <th>Picture</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model.Users)
+            {
+                <tr>
+                    <td>
+                        <img class="userPic" src="@user.PictureUrl" alt="@user.Name's picture" width="50" height="50" style="border-radius: 50%;"/>
+                    </td> <!-- Display the user's image -->
+                    <td>@user.Name</td>
+                    <td>@user.Email</td>
+                    <td>@user.Phone</td>
+                    <td data-label="Detail">
+                        <a href="@Url.Action("Details", "Main", new { id = user.Id })">View Details</a>
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
 }
 else
 {

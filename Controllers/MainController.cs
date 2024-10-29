@@ -47,5 +47,19 @@ namespace clermontSA2.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        public async Task<IActionResult> Details(int id)
+        {
+            var user = await _context.Users.FindAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return View("~/Views/Detail/Detail.cshtml", user);
+        }
+
+
+
     }
 }

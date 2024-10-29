@@ -42,8 +42,8 @@ using (var scope = app.Services.CreateScope())
 // Middleware
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Shared/Error");
-    app.UseHsts();
+    _ = app.UseExceptionHandler("/Shared/Error");
+    _ = app.UseHsts();
 }
 
 app.UseHttpsRedirection();
@@ -51,10 +51,11 @@ app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthorization();
 
-// Map controller routes
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Main}/{action=Index}/{id?}");
-
+app.UseEndpoints(endpoints =>
+{
+    _ = endpoints.MapControllerRoute(
+        name: "default",
+        pattern: "{controller=Main}/{action=Index}/{id?}");
+});
 
 app.Run();

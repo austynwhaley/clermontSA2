@@ -10,6 +10,7 @@ public class ClermontDb : DbContext
 
     public DbSet<User> Users { get; set; }
 
+    // seed db
     public async Task SeedDataAsync(RandomUser randomUserService)
     {
         if (!Users.Any())

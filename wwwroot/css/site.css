@@ -1,38 +1,81 @@
+/* Style for the user table */
 .user-table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: collapse; /* Remove spacing between cells */
+  margin-top: 20px; /* Space above the table */
+  margin-bottom: 20px;
 }
 
-.user-table th, .user-table td {
-  padding: 10px;
-  text-align: left;
-  border: 1px solid #ddd;
-}
-
+/* Table header styles */
 .user-table th {
-  background-color: #f2f2f2;
+  background-color: #f2f2f2; /* Light gray background for header */
+  padding: 10px; /* Padding for header cells */
+  text-align: left; /* Align text to the left */
+  border-bottom: 2px solid #ddd; /* Bottom border */
 }
 
+/* Table cell styles */
+.user-table td {
+  padding: 10px; /* Padding for cells */
+  border-bottom: 1px solid #ddd; /* Bottom border for cells */
+}
+
+/* User picture styles */
+.userPic {
+  width: 100px;  /* Increased width */
+  height: 100px; /* Increased height */
+  border-radius: 50%; /* Circular image */
+  object-fit: cover; /* Cover the entire area of the img */
+}
+
+
+/* Pagination controls */
 .pagination {
-  margin-top: 20px;
+  margin-top: 20px; /* Space above pagination */
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: center; /* Center the pagination controls */
+  align-items: center; /* Center items vertically */
 }
 
+/* Style for previous and next links */
 .pagination a {
-  text-decoration: none;
-  padding: 5px 10px;
-  border: 1px solid #007bff;
-  color: #007bff;
-  border-radius: 5px;
+  margin: 0 10px; /* Space between links */
+  text-decoration: none; /* Remove underline */
+  color: #007bff; /* Bootstrap primary color */
+  font-weight: bold; /* Bold text */
 }
 
+/* Hover effects for pagination links */
 .pagination a:hover {
-  background-color: #007bff;
-  color: white;
+  text-decoration: underline; /* Underline on hover */
 }
 
-.current-page {
-  font-weight: bold;
+
+.user-details {
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center align content */
+  text-align: center; /* Center text */
+}
+
+.user-info img {
+  width: 100px; /* Set image width */
+  height: 100px; /* Set image height */
+  border-radius: 50%; /* Circular image */
+  object-fit: cover; /* Cover the entire area of the img */
+  margin-bottom: 15px; /* Space below image */
+}
+
+.back-button {
+  margin-top: 20px; /* Space above button */
+  padding: 10px 15px; /* Padding for button */
+  background-color: #007bff; /* Button background color */
+  color: white; /* Button text color */
+  text-decoration: none; /* Remove underline */
+  border-radius: 5px; /* Rounded corners */
+}
+
+.back-button:hover {
+  background-color: #0056b3; /* Darker shade on hover */
 }

@@ -1,0 +1,25 @@
+@model clermontSA2.Models.User
+
+@{
+    ViewData["Title"] = "User Details";
+}
+
+<div class="container mt-4">
+    <h1 class="mb-4">User Details</h1>
+    
+    <div class="card">
+        <div class="card-header text-center">
+            <h2 class="mb-0">@Model.Name</h2>
+        </div>
+        <div class="card-body text-center">
+            <img src="@Model.PictureUrl" alt="@Model.Name" class="userPic mb-3" />
+            <p class="lead"><strong>Email:</strong> @Model.Email</p>
+            <p class="lead"><strong>Phone:</strong> @Model.Phone</p>
+            <p class="lead"><strong>Address:</strong> @Model.Address</p>
+        </div>
+    </div>
+
+    <div class="mt-4 text-center">
+        <a href="@Url.Action("Index", "Main")" class="btn btn-primary">Back to User List</a>
+    </div>
+</div>

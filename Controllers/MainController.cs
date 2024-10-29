@@ -18,25 +18,32 @@ namespace clermontSA2.Controllers
         }
 
         // users -> views actions
-        public async Task<IActionResult> Index(int page = 1, int pageSize = 10)
+        public async Task<IActionResult> Index(string searchTerm, int page = 1, int pageSize = 10)
         {
+            var usersQuery = _context.Users.AsQueryable();
 
-            var users = await _context.Users.ToListAsync();
-            var totalUsers = users.Count();
+            if (!string.IsNullOrWhiteSpace(searchTerm))
+                usersQuery = usersQuery.Where(u => u.Name.Contains(searchTerm) || u.Email.Contains(searchTerm));
+
+            var totalUsers = await usersQuery.CountAsync();
 
             var totalPages = (int)Math.Ceiling(totalUsers / (double)pageSize);
 
-            var paginatedUsers = users.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+            var paginatedUsers = await usersQuery.Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync(); 
 
             var model = new UserListViewModel
             {
                 Users = paginatedUsers,
                 CurrentPage = page,
-                TotalPages = totalPages
+                TotalPages = totalPages,
+                SearchTerm = searchTerm
             };
 
             return View("Main", model);
         }
+
 
         public async Task<IActionResult> Admin()
         {

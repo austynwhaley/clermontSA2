@@ -1,0 +1,49 @@
+# .NET-related files
+bin/
+obj/
+*.dll
+*.exe
+*.log
+*.cache
+*.pdb
+*.mdb
+*.pidb
+*.svclog
+
+# Visual Studio files
+.vscode/
+.vs/
+*.csproj.user
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Configuration and package management files
+*.config
+*.LocalHistory/
+*.nupkg
+*.snupkg
+packages/
+.nuget/
+
+# Dotnet tool folders
+.dotnet_tool/
+.dotnet_tools/
+
+# Backup and temporary files
+*.bak
+*.swp
+*.orig
+*.tmp
+*~
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Entity Framework migrations history
+Migrations/
+
+# ASP.NET Core files
+appsettings*.json

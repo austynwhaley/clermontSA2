@@ -11,14 +11,29 @@ public class RandomUser
         _httpClient = httpClient;
     }
 
-    public async Task<RandomUserReturn> FetchRandomUserDataAsync()
-    {
-        // The URL for the random user API
-        string url = "https://randomuser.me/api/";
+    public async Task<User> FetchRandomUserDataAsync()
+{
+    string url = "https://randomuser.me/api/";
 
-        // Fetch and deserialize JSON data into the Return model
-        var response = await _httpClient.GetFromJsonAsync<RandomUserReturn>(url);
+    var response = await _httpClient.GetFromJsonAsync<RandomUserReturn>(url);
+    
+    if (response?.Results != null && response.Results.Length > 0)
+    {
+        var randomUser = response.Results[0];
         
-        return response;
+        var user = new User
+        {
+            Name = $"{randomUser.Name.First} {randomUser.Name.Last}",
+            Email = randomUser.Email,
+            Phone = randomUser.Phone,
+            Address = $"{randomUser.Location.City}, {randomUser.Location.Country}",
+            PictureUrl = randomUser.Picture.Large
+        };
+
+        return user;
     }
+
+    return null;
+}
+
 }

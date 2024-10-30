@@ -33,15 +33,9 @@ Just a basic webapp the grabs users from randomuser.me API saves them to a SQL d
 1. Clone the repository:
    ```bash
    git clone git@github.com:austynwhaley/clermontSA2.git
-
-git clone https://github.com/yourusername/yourproject.git
-cd yourproject
-npm install
-
 2. Install the necessary NuGet packages:
    ```bash
    dotnet restore
-
 3. Connection String: In your appsettings.json file, add or modify the connection string to point to your SQL Server database:
    ```bash
    { "ConnectionStrings": 

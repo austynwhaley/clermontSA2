@@ -1,6 +1,6 @@
 # Clermont WebApp
 
-Just a basic webapp the grabs users from randomuser.me API saves them to a SQL db to which you can edit or delete them as well as read them from the main list.
+Just a basic webapp that grabs users from randomuser.me API saves them to a SQL db to which you can edit or delete them as well as read them from the main list.
 
 ![alt text](image.png)
 

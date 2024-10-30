@@ -14,8 +14,8 @@ public class AdminController : Controller
     [HttpPost]
     public async Task<IActionResult> Login([FromBody] LoginModel loginModel)
     {
-        var username = loginModel.Username;
-        var password = loginModel.Password;
+        var username = loginModel.Username.ToLower();
+        var password = loginModel.Password.ToLower();
 
         Console.WriteLine("Username: " + username);
         Console.WriteLine("Password: " + password);

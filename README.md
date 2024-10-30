@@ -36,7 +36,17 @@ Just a basic webapp the grabs users from randomuser.me API saves them to a SQL d
 2. Install the necessary NuGet packages:
    ```bash
    dotnet restore
-3. Connection String: In your appsettings.json file, add or modify the connection string to point to your SQL Server database:
+3. Initilize appsettings.json file for db configurati:
+    ```bash
+   {
+    "Logging": {
+      "LogLevel": {
+        "Default": "Information",
+        "Microsoft.AspNetCore": "Warning"
+      }
+    },
+    "AllowedHosts": "*"}
+4. Connection String: In your appsettings.json file, add or modify the connection string to point to your SQL Server database:
    ```bash
    { "ConnectionStrings": 
    {"DefaultConnection": "Server=your_server_name;Database=your_database_name;User Id=your_username;Password=your_password;"}}
@@ -46,6 +56,20 @@ Replace your_server_name with the name of your SQL Server instance.
 Replace your_database_name with the name of the database you want to use.
 
 Replace your_username and your_password with your SQL Server credentials.
+
+
+(Optionally you can insert your connection string manually in Program.cs at line 9 like this if there is trouble connecting)
+```csharp
+var connectionString = "Server=YOURCONNECTION;Database=YOURDB;Trusted_Connection=True;TrustServerCertificate=True;";
+builder.Services.AddDbContext<ClermontDb>(options =>
+    options.UseSqlServer(connectionString));
+```
+
+
+3. To set up migrations, use the following commands:
+    ```bash
+    dotnet ef migrations add InitialCreate
+    dotnet ef database update
 
 ## Usage
 Open your web browser and go to https://localhost:5001 (or the URL provided in your console).

@@ -36,7 +36,7 @@ Just a basic webapp the grabs users from randomuser.me API saves them to a SQL d
 2. Install the necessary NuGet packages:
    ```bash
    dotnet restore
-3. Initilize appsettings.json file for db configurati:
+3. Initialize appsettings.json file for db configurati:
     ```bash
    {
     "Logging": {
@@ -74,8 +74,13 @@ builder.Services.AddDbContext<ClermontDb>(options =>
 ## Usage
 Open your web browser and go to https://localhost:5001 (or the URL provided in your console).
 
-Click on the "Admin" link to open the login modal.
-Enter the username and password (use "admin" as the username and "password" as the password for testing).
+When selecting the admin page you be prompted to login, the credentials are 
+
+user: admin
+
+password: password
+
+these can be changed in the AdminController.cs at line 20 if desired
 
 Click the "Login" button to access the admin view.
 

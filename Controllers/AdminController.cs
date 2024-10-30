@@ -17,10 +17,6 @@ public class AdminController : Controller
         var username = loginModel.Username.ToLower();
         var password = loginModel.Password.ToLower();
 
-        Console.WriteLine("Username: " + username);
-        Console.WriteLine("Password: " + password);
-
-        // Replace with your own validation logic
         if (username == "admin" && password == "password")
         {
             var claims = new List<Claim>
